@@ -161,6 +161,6 @@ module ALU(
  			if (Result == 0)
  				Z = 1'b0;
  		end
-
+ 		assign Flags = {Z, Carry, S, O};
  	end
 endmodule
