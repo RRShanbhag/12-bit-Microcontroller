@@ -21,146 +21,161 @@ module ALU(
 
  	reg  [7:0] Result;				// Store the final result
  	reg  Carry;						// Store the carry for the next bit operation
- 	wire Z, S, O; 					// No need to store but just send it to Flags
+ 	reg [3:0] Flags;
 
- 	always@(*)						// For every change in the inputs
- 	begin
-
- 	case(Mode)
-
- 		//Addition M-Type
- 		4'b0000: 
- 		begin
- 			{Carry, Result} = Operand1 + Operand2;
- 			if((Operand1[7] == Operand2[7]) and (Result[7] == Operand1[7])) 
- 				O = 1'b1;
- 			else
- 				O = 1'b0;
-
- 			S = Result[7];
-
- 			if (Result == 0)
- 				Z = 1'b0;
- 		end
- 		
- 		//Subtraction M-Type
- 		4'b0001: 
- 		begin
- 			{Carry, Result} = Operand1 - Operand2;
-
- 			if((Operand1[7] == Operand2[7]) and (Result[7] != Operand1[7])) 
- 				O = 1'b1;
- 			else
- 				O = 1'b0;
-
- 			S = Result[7];
- 			if (Result == 0)
- 				Z = 1'b0;
- 		end
-
- 		//Move Acc to Mem
- 		4'b0010: Result = Operand1;
-
- 		//Move Mem to Acc
-	  	4'b0011: Result = Operand2;
-  		
-	  	//AND M-Type
-  		4'b0100: 
-  		begin
-  			Result = Operand1 & Operand2;
-  			if (Result == 0)
- 				Z = 1'b0;
-  		end
-  		//OR M-Type
-  		4'b0101: 
-  		begin
-  			Result = Operand1 | Operand2;
-  			if (Result == 0)
- 				Z = 1'b0;
- 		end
-
-  		//XOR M-Type
-  		4'b0110: 
-  		begin
-  			Result = Operand1 ^ Operand2;
-  			if (Result == 0)
- 				Z = 1'b0;
- 		end
-
- 		//Sutraction Mem to Acc 
- 		4'b0111:
- 		begin
- 			{Carry, Result} = Operand1 - Operand2;
-
- 			if((Operand1[7] == Operand2[7]) and (Result[7] != Operand1[7])) 
- 				O = 1'b1;
- 			else
- 				O = 1'b0;
-
- 			S = Result[7];
- 			if (Result == 0)
- 				Z = 1'b0;
- 		end
-
- 		//Increment by 1
- 		4'b1000:
- 		begin
- 			{Carry, Result} = Operand1 + 8'h1;
- 			if(Result[7] == Operand1[7]) 
- 				O = 1'b1;
- 			else
- 				O = 1'b0;
-
- 			S = Result[7];
-
- 			if (Result == 0)
- 				Z = 1'b0;
- 		end
-
- 		//Decrement by 1
- 		4'b1001:
- 		begin
- 			{Carry, Result} = Operand1 - 8'h1;
- 			if(Result[7] == Operand1[7]) 
- 				O = 1'b1;
- 			else
- 				O = 1'b0;
-
- 			S = Result[7];
-
- 			if (Result == 0)
- 				Z = 1'b0;
- 		end
-
- 		//Rotate Left
- 		4'b1010: Result=(Operand2 << Operand1[2:0])|(Operand2>>Operand1[2:0]);
-  		
-  		//Rotate Right
-  		4'b1011: Result=(Operand2 >> Operand1[2:0])|(Operand2<<Operand1[2:0]);
-  		
-  		//Shift Left Logical
-  		4'b1100: Out_ALU = Operand2 << Operand1[2:0];
-	  	
-	  	//Shift Right Logical
-	  	4'b1101: Out_ALU = Operand2 >> Operand1[2:0];
-  		
-  		//Shift Right Arithmatic
-  		4'b1110: Out_ALU = Operand2 >>> Operand1[2:0];
-
-  		//Complement
-  		4'b1111:
- 		begin
- 			{Carry, Result} = 8'h0 - Operand1;
- 			if(Result[7] == Operand1[7]) 
- 				O = 1'b1;
- 			else
- 				O = 1'b0;
-
- 			S = Result[7];
-
- 			if (Result == 0)
- 				Z = 1'b0;
- 		end
- 		assign Flags = {Z, Carry, S, O};
+ 	always@(*) begin				// For every change in the inputs
+ 	if (Enable == 0) begin
+ 		Result = 0;
+ 		Flags = 0;
  	end
+
+ 	else begin
+
+		case(Mode)
+
+			//Addition M-Type
+			4'b0000: 
+			begin
+				{Carry, Result} = Operand1 + Operand2;
+				if((Operand1[7] == Operand2[7]) && (Result[7] == Operand1[7])) 
+				begin
+					Flags[0] = 1'b1;
+				end
+				else 
+				begin
+					Flags[0] = 1'b0;
+				end
+				Flags[1] = Result[7];
+
+				if (Result == 0)
+					Flags[3] = 1'b0;
+				Flags[2] = Carry;
+			end
+			
+			//Subtraction M-Type
+			4'b0001: 
+			begin
+				{Carry, Result} = Operand1 - Operand2;
+
+				if((Operand1[7] == Operand2[7]) && (Result[7] != Operand1[7])) 
+					Flags[0] = 1'b1;
+				else
+					Flags[0] = 1'b0;
+
+				Flags[1] = Result[7];
+				Flags[2] = Carry;
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+
+			//Move Acc to Mem
+			4'b0010: Result = Operand1;
+
+			//Move Mem to Acc
+	  		4'b0011: Result = Operand2;
+			
+	  		//AND M-Type
+			4'b0100: 
+			begin
+				Result = Operand1 & Operand2;
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+			//OR M-Type
+			4'b0101: 
+			begin
+				Result = Operand1 | Operand2;
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+
+			//XOR M-Type
+			4'b0110: 
+			begin
+				Result = Operand1 ^ Operand2;
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+
+			//Sutraction Mem to Acc 
+			4'b0111:
+			begin
+				{Carry, Result} = Operand1 - Operand2;
+
+				if((Operand1[7] == Operand2[7]) && (Result[7] != Operand1[7])) 
+					Flags[0] = 1'b1;
+				else
+					Flags[0] = 1'b0;
+
+				Flags[1] = Result[7];
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+
+			//Increment by 1
+			4'b1000:
+			begin
+				{Carry, Result} = Operand1 + 8'h1;
+				if(Result[7] == Operand1[7]) 
+					Flags[0] = 1'b1;
+				else
+					Flags[0] = 1'b0;
+
+				Flags[1] = Result[7];
+
+				if (Result == 0)
+					Flags[3] = 1'b0;
+				Flags[2] = Carry;
+			end
+
+			//Decrement by 1
+			4'b1001:
+			begin
+				{Carry, Result} = Operand1 - 8'h1;
+				if(Result[7] == Operand1[7]) 
+					Flags[0] = 1'b1;
+				else
+					Flags[0] = 1'b0;
+
+				Flags[1] = Result[7];
+				Flags[2] = Carry;
+
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+
+			//Rotate Left
+			4'b1010: Result=(Operand2 << Operand1[2:0])|(Operand2>>Operand1[2:0]);
+			
+			//Rotate Right
+			4'b1011: Result=(Operand2 >> Operand1[2:0])|(Operand2<<Operand1[2:0]);
+			
+			//Shift Left Logical
+			4'b1100: Result = Operand2 << Operand1[2:0];
+	  	
+		  	//Shift Right Logical
+		  	4'b1101: Result = Operand2 >> Operand1[2:0];
+			
+			//Shift Right Arithmatic
+			4'b1110: Result = Operand2 >>> Operand1[2:0];
+
+			//Complement
+			4'b1111:
+			begin
+				{Carry, Result} = 8'h0 - Operand1;
+				if(Result[7] == Operand1[7]) 
+					Flags[0] = 1'b1;
+				else
+					Flags[0] = 1'b0;
+
+				Flags[1] = Result[7];
+				Flags[2] = Carry;
+
+				if (Result == 0)
+					Flags[3] = 1'b0;
+			end
+			default: Result = Operand2;
+		endcase
+	end
+end
 endmodule

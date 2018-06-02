@@ -1,0 +1,140 @@
+$date
+	Sat Jun  2 06:50:25 2018
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module ALU_tb $end
+$var wire 4 ! flags_out [3:0] $end
+$var wire 8 " result [7:0] $end
+$var reg 4 # cflags [3:0] $end
+$var reg 1 $ en $end
+$var reg 4 % mode [3:0] $end
+$var reg 8 & op1 [7:0] $end
+$var reg 8 ' op2 [7:0] $end
+$scope module uut $end
+$var wire 4 ( Cflags [3:0] $end
+$var wire 1 ) Enable $end
+$var wire 4 * Mode [3:0] $end
+$var wire 8 + Operand1 [7:0] $end
+$var wire 8 , Operand2 [7:0] $end
+$var reg 1 - Carry $end
+$var reg 4 . Flags [3:0] $end
+$var reg 8 / Result [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 /
+b0 .
+x-
+b0 ,
+b0 +
+bx *
+0)
+bx (
+b0 '
+b0 &
+bx %
+0$
+bx #
+b0 "
+b0 !
+$end
+#10
+b1000 /
+b1000 "
+1$
+1)
+b1000 '
+b1000 ,
+b11111100 &
+b11111100 +
+#30
+b100 !
+b100 .
+1-
+b100 /
+b100 "
+b0 %
+b0 *
+#50
+b10 !
+b10 .
+0-
+b11110100 /
+b11110100 "
+b1 %
+b1 *
+#70
+b11111100 /
+b11111100 "
+b10 %
+b10 *
+#90
+b1000 /
+b1000 "
+b11 %
+b11 *
+#110
+b100 %
+b100 *
+#130
+b11111100 /
+b11111100 "
+b101 %
+b101 *
+#150
+b11110100 /
+b11110100 "
+b110 %
+b110 *
+#170
+b10 .
+b111 %
+b111 *
+#190
+b11 .
+b11 !
+b11111101 /
+b11111101 "
+b1000 %
+b1000 *
+#210
+b11 .
+b11111011 /
+b11111011 "
+b1001 %
+b1001 *
+#230
+b10000000 /
+b10000000 "
+b1010 %
+b1010 *
+#250
+b1011 %
+b1011 *
+#270
+b1100 %
+b1100 *
+#290
+b0 /
+b0 "
+b1101 %
+b1101 *
+#310
+b1110 %
+b1110 *
+#330
+b100 .
+b100 !
+1-
+b100 /
+b100 "
+b1111 %
+b1111 *
+#380
