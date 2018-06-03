@@ -1,0 +1,167 @@
+$date
+	Sun Jun  3 11:58:56 2018
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module DMem_tb $end
+$var wire 8 ! Out_data [7:0] $end
+$var reg 4 " Addr_port [3:0] $end
+$var reg 1 # En $end
+$var reg 8 $ In_data [7:0] $end
+$var reg 1 % W_En $end
+$var reg 1 & clk $end
+$scope module uut $end
+$var wire 4 ' Address_port [3:0] $end
+$var wire 1 ( Enable $end
+$var wire 8 ) Input_data [7:0] $end
+$var wire 8 * Output_data [7:0] $end
+$var wire 1 + Write_en $end
+$var wire 1 , clk $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0,
+0+
+b0 *
+b0 )
+0(
+b0 '
+0&
+0%
+b0 $
+0#
+b0 "
+b0 !
+$end
+#10
+bx !
+bx *
+1#
+1(
+1&
+1,
+#20
+1%
+1+
+0&
+0,
+#30
+b10101011 !
+b10101011 *
+b10101011 $
+b10101011 )
+1&
+1,
+#40
+bx !
+bx *
+b10010000 $
+b10010000 )
+b1 "
+b1 '
+0&
+0,
+#50
+b11111111 !
+b11111111 *
+b11111111 $
+b11111111 )
+b101 "
+b101 '
+1&
+1,
+#60
+bx !
+bx *
+b10010 $
+b10010 )
+b1000 "
+b1000 '
+0&
+0,
+#70
+b110100 !
+b110100 *
+b110100 $
+b110100 )
+b1010 "
+b1010 '
+1&
+1,
+#80
+bx !
+bx *
+b1110101 $
+b1110101 )
+b1111 "
+b1111 '
+0&
+0,
+#90
+b1100100 !
+b1100100 *
+b1100100 $
+b1100100 )
+b1011 "
+b1011 '
+1&
+1,
+#100
+bx !
+bx *
+b11111110 $
+b11111110 )
+b1001 "
+b1001 '
+0&
+0,
+#110
+0%
+0+
+1&
+1,
+#120
+b110100 !
+b110100 *
+b1010 "
+b1010 '
+0&
+0,
+#130
+bx !
+bx *
+b10 "
+b10 '
+1&
+1,
+#140
+b1111 "
+b1111 '
+0&
+0,
+#150
+b1100 "
+b1100 '
+1&
+1,
+#160
+0&
+0,
+#170
+1&
+1,
+#180
+0&
+0,
+#190
+1&
+1,
+#200
+0&
+0,
