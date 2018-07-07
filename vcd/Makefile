@@ -1,4 +1,4 @@
-make: ../out/alu.out
+make: ../out/
 	@vvp ../out/alu.out
 	@vvp ../out/dmem.out
 
