@@ -5,7 +5,7 @@ Reference and Architecture:
 http://www.fpga4student.com/2016/11/verilog-hdl-implementation-of-micro.html
 
 Test Case 1:
-0000_0000_0000`//NOP
+0000_0000_0000 //NOP
 1011_0000_0001 //MOV Acc <- 1
 0010_0010_0000 //MOV DMem <- Acc
 1011_0000_0000 //MOV Acc <- 0
