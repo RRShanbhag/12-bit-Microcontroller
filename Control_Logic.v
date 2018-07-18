@@ -85,7 +85,7 @@
  			Acc_En = 1'b1; // Since I-Type, Operand2 for ALU -> Accumulator
  			StatusReg_En = 1'b1; //Enable Status Register
  			ALU_En = 1'b1; //Enable ALU
- 			ALU_Mode = Instr_Reg[10:8]; //Opcode in I-Type-> 4'b0xxx
+ 			ALU_Mode = Instr_Reg[10:8]; //Opcode in I-Type-> 4'b1xxx
  			MUX1_Sel = 1; // Take the next Instruction Addr from Adder
  			MUX2_Sel = 0; // Do not take value from Memory
  		end
@@ -100,7 +100,7 @@
  			Acc_En = Instr_Reg[8];
  			StatusReg_En = 1'b1;
  			DataMem_En = !(Instr_Reg[8]);
- 			DataReg_En = !(Instr_Reg[8]);
+ 			DataMemWrite_En = !(Instr_Reg[8]);
  			ALU_En = 1'b1;
  			ALU_Mode = Instr_Reg[7:4];
  			MUX1_Sel = 1'b1;

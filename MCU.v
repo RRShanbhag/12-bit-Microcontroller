@@ -38,7 +38,7 @@
  //LOAD all the 10 instructions to Memory
  initial
  begin
- $readmemb("progMem.dat", ProgMem, 0, 9);
+ $readmemb("/home/shanbhag/Desktop/Verilog_Projects/MCU/tests/case1.dat", ProgMem, 0, 9);
  end
  
  //ALU
@@ -54,16 +54,16 @@
 
  //MUX1
  MUX1 MUX1_unit(
- .Input1(InstrReg[7:0]),
- .Input2(AdderOut),
+ .Input1(AdderOut),
+ .Input2(InstrReg[7:0]),
  .Sel(MUX1_Sel),
  .Out(ProgCounter_Updated)
  );
 
  //MUX2
  MUX1 MUX2_unit(
- .Input1(InstrReg[7:0]),
- .Input2(DataReg),
+ .Input1(DataReg),
+ .Input2(InstrReg[7:0]),
  .Sel(MUX2_Sel),
  .Out(ALU_Operand2)
  );
@@ -85,7 +85,8 @@
  .Addr(ProgCounter),
  .Load_En(ProgMem_LEn),
  .Load_Addr(LoadAddr),
- .Load_Instr(LoadInstr)
+ .Load_Instr(LoadInstr),
+ .Instr(InstrReg_Updated)
  );
 
  //Adder
@@ -108,6 +109,8 @@
  .ALU_En(ALU_En),
  .MUX1_Sel(MUX1_Sel),
  .MUX2_Sel(MUX2_Sel),
+ .DataMem_En(DataMem_En),
+ .DataReg_En(DataReg_En),
  .ProgMemLoad_En(ProgMem_LEn),
  .ALU_Mode(ALU_Mode)
  );

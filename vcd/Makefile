@@ -1,6 +1,5 @@
 make: ../out/
-	@vvp ../out/alu.out
-	@vvp ../out/dmem.out
+	@vvp ../out/mcu.out
 
 clean:
 	@rm -r *.vcd

@@ -8,6 +8,7 @@ all:
 	@$(CC) -Wall -o out/MUX1.out MUX1.v
 	@$(CC) -Wall -o out/PMem.out PMem.v
 	@$(CC) -Wall -o out/CtrlLogic.out Control_Logic.v
+	@$(CC) -Wall -o out/mcu.out MCU.v ALU.v MUX1.v DMem.v PMem.v Adder.v Control_Logic.v MCU_tb.v
 	@echo "Built Module"
 	@+$(MAKE) -C ./vcd
 	@echo "Generated VCD file"
