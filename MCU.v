@@ -38,7 +38,7 @@
  //LOAD all the 10 instructions to Memory
  initial
  begin
- $readmemb("/home/shanbhag/Desktop/Verilog_Projects/MCU/tests/case1.dat", ProgMem, 0, 9);
+ $readmemb("/home/shanbhag/Desktop/Verilog_Projects/MCU/tests/case2.dat", ProgMem, 0, 9);
  end
  
  //ALU

@@ -100,7 +100,7 @@ module ALU(
 			//Sutraction Mem to Acc 
 			4'b0111:
 			begin
-				{Carry, Result} = Operand1 - Operand2;
+				{Carry, Result} = Operand2 - Operand1;
 
 				if((Operand1[7] == Operand2[7]) && (Result[7] != Operand1[7])) 
 					Flags[0] = 1'b1;
